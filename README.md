@@ -10,11 +10,24 @@ Two linked prediction tasks:
 - **Part B (Classification):** predict `Personal_Loan` (will this customer accept a loan offer), using the *predicted* CCAvg from Part A instead of the real one, to avoid leaking the answer.
 
 ```mermaid
-flowchart LR
-    A[Customer data<br/>5,000 rows] --> B[Clean & explore]
-    B --> C[Random Forest<br/>predict CCAvg]
-    C --> D[Predicted_CCAvg<br/>engineered feature]
-    D --> E[XGBoost<br/>predict Personal_Loan]
+flowchart TD
+    A[("Bank customer data<br/>5,000 rows x 14 columns")] --> B[Clean data<br/>fix 52 negative<br/>Experience values]
+    B --> C[EDA<br/>univariate, bivariate,<br/>correlation analysis]
+
+    subgraph partA[" Part A: Regression "]
+        direction TB
+        D[Random Forest Regressor<br/>Target: CCAvg]
+        D --> E{{"Test R2: 0.47<br/>Test RMSE: 1.27"}}
+    end
+
+    subgraph partB[" Part B: Classification "]
+        direction TB
+        F[XGBoost Classifier<br/>Target: Personal_Loan]
+        F --> G{{"Test Accuracy: 0.978<br/>Recall (Loan=1): 0.93"}}
+    end
+
+    C --> D
+    E -->|"Predicted_CCAvg<br/>used as input feature"| F
 ```
 
 ## Dataset
@@ -62,6 +75,15 @@ Variable correlations across the full dataset:
 ## Tools
 
 Python, pandas, scikit-learn (Random Forest), XGBoost, matplotlib.
+
+## Setup
+
+```bash
+poetry install
+poetry run jupyter notebook Loan_Modeling_final.ipynb
+```
+
+Note: the raw dataset (`Loan_Modelling.xlsx`) isn't included in this repo, so the notebook won't re-run end-to-end as-is. The commands above set up the environment used; the notebook itself is best viewed on GitHub for the code, charts, and output already saved in it.
 
 ## Files
 
