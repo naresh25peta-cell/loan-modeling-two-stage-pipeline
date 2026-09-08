@@ -80,11 +80,11 @@ Python, pandas, scikit-learn (Random Forest), XGBoost, matplotlib.
 
 ```bash
 poetry install
-poetry run jupyter notebook Loan_Modeling_final.ipynb
+poetry run jupyter notebook loan_modeling.ipynb
 ```
 
 Note: the raw dataset (`Loan_Modelling.xlsx`) isn't included in this repo, so the notebook won't re-run end-to-end as-is. The commands above set up the environment used; the notebook itself is best viewed on GitHub for the code, charts, and output already saved in it.
 
 ## Files
 
-`Loan_Modeling_final.ipynb` has the full workflow: data cleaning, EDA, both models, and evaluation.
+`loan_modeling.ipynb` has the full workflow: data cleaning, EDA, both models, and evaluation.
