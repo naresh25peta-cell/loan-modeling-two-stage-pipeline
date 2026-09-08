@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "loan-modeling-two-stage-pipeline"
+version = "0.1.0"
+description = "Two-stage pipeline: Random Forest regression for credit card spend, XGBoost classification for personal loan acceptance"
+authors = ["Naresh Kumar"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2"
+numpy = "^1.26"
+matplotlib = "^3.9"
+scikit-learn = "^1.5"
+xgboost = "^2.1"
+openpyxl = "^3.1"
+jupyter = "^1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
